@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://1xj6w5lkq683"]
+
+[ext_resource type="StyleBox" uid="uid://qkt7asy4qc1b" path="res://themes/button_stylebox/button_disabled.tres" id="1_0c736"]
+[ext_resource type="StyleBox" uid="uid://cllgcgkb2bsnf" path="res://themes/button_stylebox/button_focus.tres" id="2_j1dhk"]
+[ext_resource type="StyleBox" uid="uid://cbnfbnnbre2m4" path="res://themes/button_stylebox/button_hover.tres" id="3_uarnf"]
+[ext_resource type="StyleBox" uid="uid://c0wgd6kelqt76" path="res://themes/button_stylebox/button_normal.tres" id="4_wvkvq"]
+[ext_resource type="StyleBox" uid="uid://cn5orm14xdlgs" path="res://themes/button_stylebox/button_pressed.tres" id="5_1ugmw"]
+
+[resource]
+Button/font_sizes/font_size = 32
+Button/styles/disabled = ExtResource("1_0c736")
+Button/styles/focus = ExtResource("2_j1dhk")
+Button/styles/hover = ExtResource("3_uarnf")
+Button/styles/normal = ExtResource("4_wvkvq")
+Button/styles/pressed = ExtResource("5_1ugmw")
+MarginContainer/constants/margin_bottom = 24
+MarginContainer/constants/margin_left = 24
+MarginContainer/constants/margin_right = 24
+MarginContainer/constants/margin_top = 24
