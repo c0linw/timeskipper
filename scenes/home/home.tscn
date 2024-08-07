@@ -27,6 +27,9 @@ text = "TimeSkipper"
 label_settings = SubResource("LabelSettings_diw2f")
 horizontal_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="SimpleMetronomeButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
