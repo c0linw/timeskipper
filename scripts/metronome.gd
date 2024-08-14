@@ -13,16 +13,16 @@ extends Node
 	set(value):
 		playing = false
 		meter = value
-var start_time_usec := 0
-var last_time_usec := 0
+var start_time_msec := 0
+var last_time_msec := 0
 var last_beat := -1
 var playing := false:
 	get:
 		return playing
 	set(value):
 		if value:
-			start_time_usec = Time.get_ticks_usec()
-			last_time_usec = start_time_usec
+			start_time_msec = Shinobu.get_dsp_time()
+			last_time_msec = start_time_msec
 			last_beat = -1
 		playing = value
 
@@ -36,13 +36,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if playing:
-		var current_time_usec := Time.get_ticks_usec()
-		if current_time_usec > last_time_usec:
-			var current_beat = bpm * (current_time_usec - start_time_usec) / 60000000
+		var current_time_msec := Shinobu.get_dsp_time()
+		if current_time_msec > last_time_msec:
+			var current_beat = bpm * (current_time_msec - start_time_msec) / 60000
 			if current_beat > last_beat:
-				emit_signal("beat", beat)
+				var next_beat_time_msec = start_time_msec + (current_beat + 1) * 60000/bpm
+				emit_signal("beat", current_beat, next_beat_time_msec)
 				last_beat = current_beat
-			last_time_usec = current_time_usec
+			last_time_msec = current_time_msec
 
 #region Signal callbacks
 func _on_set_playing(value: bool):

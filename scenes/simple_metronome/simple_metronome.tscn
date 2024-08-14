@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch4dk0pd0d2t4"]
+[gd_scene load_steps=4 format=3 uid="uid://ch4dk0pd0d2t4"]
 
 [ext_resource type="Theme" uid="uid://1xj6w5lkq683" path="res://themes/main.tres" id="1_cs33y"]
 [ext_resource type="Script" path="res://scripts/metronome.gd" id="2_4xkee"]
+[ext_resource type="Script" path="res://scenes/simple_metronome/metronome_audio.gd" id="3_7a72c"]
 
 [node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -33,4 +34,8 @@ text = "Play/Pause"
 [node name="Metronome" type="Node" parent="."]
 script = ExtResource("2_4xkee")
 
+[node name="MetronomeAudio" type="Node" parent="."]
+script = ExtResource("3_7a72c")
+
 [connection signal="toggled" from="MarginContainer/VBoxContainer/Button" to="Metronome" method="_on_set_playing"]
+[connection signal="beat" from="Metronome" to="MetronomeAudio" method="_on_metronome_beat"]

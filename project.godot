@@ -15,6 +15,10 @@ run/main_scene="res://scenes/home/home.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ShinobuGlobals="*res://scripts/shinobu_globals.gd"
+
 [display]
 
 window/size/viewport_width=720
