@@ -40,8 +40,8 @@ func _process(delta):
 		if current_time_msec > last_time_msec:
 			var current_beat = bpm * (current_time_msec - start_time_msec) / 60000
 			if current_beat > last_beat:
-				var next_beat_time_msec = start_time_msec + (current_beat + 1) * 60000/bpm
-				emit_signal("beat", current_beat, next_beat_time_msec)
+				var current_beat_time = start_time_msec + (60000 / bpm) * current_beat
+				emit_signal("beat", current_beat, current_beat_time)
 				last_beat = current_beat
 			last_time_msec = current_time_msec
 
