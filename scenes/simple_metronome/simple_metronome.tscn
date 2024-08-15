@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch4dk0pd0d2t4"]
+[gd_scene load_steps=8 format=3 uid="uid://ch4dk0pd0d2t4"]
 
 [ext_resource type="Theme" uid="uid://1xj6w5lkq683" path="res://themes/main.tres" id="1_cs33y"]
+[ext_resource type="Texture2D" uid="uid://duxw0m6ndxppq" path="res://textures/button_circle_play.png" id="2_1h5lw"]
 [ext_resource type="Script" path="res://scripts/metronome.gd" id="2_4xkee"]
 [ext_resource type="Script" path="res://scenes/simple_metronome/metronome_audio.gd" id="3_7a72c"]
+[ext_resource type="Texture2D" uid="uid://e0tk3l1ws8sk" path="res://textures/button_circle_stop.png" id="3_7fedl"]
+[ext_resource type="Script" path="res://scenes/simple_metronome/play_button.gd" id="4_84ndm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iswxp"]
 
 [node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 15
@@ -17,19 +22,47 @@ theme = ExtResource("1_cs33y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "120"
-alignment = 1
-virtual_keyboard_type = 3
+columns = 2
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MeterLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Meter"
+
+[node name="MeterSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+min_value = 1.0
+value = 4.0
+alignment = 1
+
+[node name="BPMLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "BPM"
+
+[node name="BPMSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+step = 0.01
+value = 120.0
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+theme_override_styles/separator = SubResource("StyleBoxEmpty_iswxp")
+
+[node name="PlayButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
-text = "Play/Pause"
+texture_normal = ExtResource("2_1h5lw")
+texture_pressed = ExtResource("3_7fedl")
+script = ExtResource("4_84ndm")
 
 [node name="Metronome" type="Node" parent="."]
 script = ExtResource("2_4xkee")
@@ -37,5 +70,10 @@ script = ExtResource("2_4xkee")
 [node name="MetronomeAudio" type="Node" parent="."]
 script = ExtResource("3_7a72c")
 
-[connection signal="toggled" from="MarginContainer/VBoxContainer/Button" to="Metronome" method="_on_set_playing"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/MeterSpinBox" to="Metronome" method="_on_set_meter"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/MeterSpinBox" to="MetronomeAudio" method="_on_set_meter"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/MeterSpinBox" to="MarginContainer/VBoxContainer/PlayButton" method="_on_bpm_set"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/BPMSpinBox" to="Metronome" method="_on_set_bpm"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/BPMSpinBox" to="MarginContainer/VBoxContainer/PlayButton" method="_on_bpm_set"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/PlayButton" to="Metronome" method="_on_set_playing"]
 [connection signal="beat" from="Metronome" to="MetronomeAudio" method="_on_metronome_beat"]

@@ -10,9 +10,9 @@ var sfx_players: Array[ShinobuSoundPlayer]
 var click1 := "sin_800hz_4ms"
 var click2 := "sin_1600hz_4ms"
 
-var meter := 4
+var meter: int = 4
 
-const OFFSET_MS := 50
+const OFFSET_MS: int = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,11 +36,12 @@ func _on_metronome_beat(beat: int, beat_time_msec: int):
 	sfx_player.schedule_start_time(beat_time_msec + OFFSET_MS)
 	sfx_player.start()
 
-func _on_set_meter(new_meter: int):
+func _on_set_meter(new_meter: float):
+	meter = int(new_meter)
 	for player in sfx_players:
 		player.queue_free()
 	sfx_players.clear()
-	for i in range(0, new_meter):
+	for i in range(0, meter):
 		var click_key = click1 if i == 0 else click2
 		var new_player = click_sources[click_key].instantiate(ShinobuGlobals.sfx_group)
 		sfx_players.push_back(new_player)

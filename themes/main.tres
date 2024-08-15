@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://1xj6w5lkq683"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://1xj6w5lkq683"]
 
 [ext_resource type="StyleBox" uid="uid://qkt7asy4qc1b" path="res://themes/button_stylebox/button_disabled.tres" id="1_0c736"]
 [ext_resource type="StyleBox" uid="uid://cllgcgkb2bsnf" path="res://themes/button_stylebox/button_focus.tres" id="2_j1dhk"]
@@ -7,6 +7,9 @@
 [ext_resource type="StyleBox" uid="uid://cn5orm14xdlgs" path="res://themes/button_stylebox/button_pressed.tres" id="5_1ugmw"]
 [ext_resource type="StyleBox" uid="uid://g34ovu7fwmq1" path="res://themes/misc_style/hseparator.tres" id="6_gq1g6"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf7is"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+
 [resource]
 Button/font_sizes/font_size = 32
 Button/styles/disabled = ExtResource("1_0c736")
@@ -14,9 +17,14 @@ Button/styles/focus = ExtResource("2_j1dhk")
 Button/styles/hover = ExtResource("3_uarnf")
 Button/styles/normal = ExtResource("4_wvkvq")
 Button/styles/pressed = ExtResource("5_1ugmw")
+GridContainer/constants/h_separation = 16
+GridContainer/constants/v_separation = 8
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = ExtResource("6_gq1g6")
+Label/font_sizes/font_size = 24
+LineEdit/font_sizes/font_size = 24
 MarginContainer/constants/margin_bottom = 24
 MarginContainer/constants/margin_left = 24
 MarginContainer/constants/margin_right = 24
 MarginContainer/constants/margin_top = 24
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_jf7is")

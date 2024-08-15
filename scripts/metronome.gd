@@ -1,13 +1,13 @@
 class_name Metronome
 extends Node
 
-@export var bpm := 120:
+@export var bpm: float = 120.0:
 	get: 
 		return bpm
 	set(value): 
 		playing = false
 		bpm = value
-@export var meter := 4:
+@export var meter: int = 4:
 	get:
 		return meter
 	set(value):
@@ -38,9 +38,9 @@ func _process(delta):
 	if playing:
 		var current_time_msec := Shinobu.get_dsp_time()
 		if current_time_msec > last_time_msec:
-			var current_beat = bpm * (current_time_msec - start_time_msec) / 60000
+			var current_beat = int(bpm * (current_time_msec - start_time_msec) / 60000)
 			if current_beat > last_beat:
-				var current_beat_time = start_time_msec + (60000 / bpm) * current_beat
+				var current_beat_time = int(start_time_msec + (60000 / bpm) * current_beat)
 				emit_signal("beat", current_beat, current_beat_time)
 				last_beat = current_beat
 			last_time_msec = current_time_msec
@@ -49,9 +49,9 @@ func _process(delta):
 func _on_set_playing(value: bool):
 	playing = value
 	
-func _on_set_bpm(new_bpm: int):
+func _on_set_bpm(new_bpm: float):
 	bpm = new_bpm
 	
-func _on_set_meter(new_meter: int):
-	meter = new_meter
+func _on_set_meter(new_meter: float):
+	meter = int(new_meter)
 #endregion
